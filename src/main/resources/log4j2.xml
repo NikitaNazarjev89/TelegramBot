@@ -1,0 +1,23 @@
+<Configuration status="warn" name="MyApp" packages="">
+    <Appenders>
+        <RollingFile name="myLogs" fileName="logs/bot.log"
+                     filePattern="logs/hippodrome.%d{yyyy-MM-dd}.log"
+                     ignoreExceptions="false">
+
+            <PatternLayout pattern="%d{DEFAULT} %-5level %logger{36}: %msg%n"/>
+            <TimeBasedTriggeringPolicy />
+            <DefaultRolloverStrategy>
+                <Delete basePath="logs" maxDepth="2">
+                    <IfFileName glob="bot.*.log" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="myLogs"/>
+        </Root>
+    </Loggers>
+</Configuration>
